@@ -19,7 +19,7 @@ const CONTACT_CONFIG = {
 
     // 正式联系信息（律师真实信息）
     production: {
-        lawyerName: '吕昕橦 律师',
+        lawyerName: '吕昕橦',
         phone1: '(212)812-8253',
         phone2: '(347)966-1978',
         email: 'catherine.lyu@lyulawpllc.com',
