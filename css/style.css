@@ -1,0 +1,695 @@
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Microsoft YaHei', 'PingFang SC', -apple-system, sans-serif;
+            background: #D9C9B8;
+            color: #2c2c2c;
+            line-height: 1.6;
+        }
+
+        /* 顶部导航栏 */
+        .header {
+            background: #e4dccf;
+            border-bottom: 3px solid #8B2635;
+            padding: 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2c2c2c;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo img {
+            height: 60px;
+            width: auto;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo span {
+            color: #5c5c5c;
+            font-size: 14px;
+            display: block;
+            font-weight: normal;
+            margin-top: 5px;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 35px;
+            align-items: center;
+            list-style: none;
+        }
+
+        .nav-menu li a {
+            color: #2c2c2c;
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.3s;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .nav-menu li a:hover {
+            color: #8B2635;
+        }
+
+        .phone-contact {
+            border: 2px solid #8B2635;
+            padding: 10px 20px;
+            border-radius: 5px;
+            color: #8B2635;
+            font-weight: bold;
+        }
+
+        /* 主要内容区域 */
+        .main-content {
+            margin-top: 100px;
+            padding: 40px 20px;
+        }
+
+        .page-section {
+            display: none;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .page-section.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* 英文标语 */
+        .tagline {
+            text-align: right;
+            font-style: italic;
+            color: #8B2635;
+            font-size: 20px;
+            margin-bottom: 40px;
+            padding-right: 40px;
+        }
+
+        /* 主页介绍区域 */
+        .hero-section {
+            text-align: center;
+            padding: 60px 40px;
+            background: #E8DED0;
+            border: 3px solid #8B2635;
+            border-radius: 10px;
+            margin-bottom: 60px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .hero-section h1 {
+            font-size: 48px;
+            color: #8B2635;
+            margin-bottom: 20px;
+        }
+
+        .hero-section p {
+            font-size: 20px;
+            line-height: 1.8;
+            max-width: 900px;
+            margin: 20px auto;
+            color: #3c3c3c;
+        }
+
+        /* 业务卡片标题 */
+        .section-title {
+            text-align: center;
+            font-size: 42px;
+            color: #8B2635;
+            margin: 60px 0 40px 0;
+            letter-spacing: 3px;
+        }
+
+        /* 业务领域容器 */
+        .services-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            padding: 0 40px;
+            margin-bottom: 40px;
+        }
+
+        /* 业务卡片网格 */
+        .services-grid {
+            display: contents;
+        }
+
+        .service-card {
+            background: #E8DED0;
+            border: 2px solid #8B2635;
+            border-radius: 10px;
+            overflow: hidden;
+            display: flex;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(139, 38, 53, 0.3);
+        }
+
+        .service-card:active {
+            transform: translateY(-2px);
+        }
+
+        .service-content {
+            flex: 1;
+            padding: 30px;
+        }
+
+        .service-content h3 {
+            color: #8B2635;
+            font-size: 24px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .service-content h3::after {
+            content: " →";
+            font-size: 20px;
+            opacity: 0;
+            transition: opacity 0.3s, transform 0.3s;
+            display: inline-block;
+        }
+
+        .service-card:hover .service-content h3::after {
+            opacity: 1;
+            transform: translateX(5px);
+        }
+
+        .service-content ul {
+            list-style: none;
+        }
+
+        .service-content ul li {
+            padding: 8px 0;
+            padding-left: 20px;
+            position: relative;
+            font-size: 15px;
+            color: #3c3c3c;
+        }
+
+        .service-content ul li:before {
+            content: "•";
+            color: #8B2635;
+            position: absolute;
+            left: 0;
+            font-size: 20px;
+        }
+
+        .service-image {
+            flex: 1;
+            min-height: 250px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* 预约表单 */
+        .appointment-form {
+            max-width: 700px;
+            margin: 0 auto;
+            background: #E8DED0;
+            padding: 50px;
+            border: 2px solid #8B2635;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            color: #8B2635;
+            margin-bottom: 10px;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            background: #fff;
+            border: 2px solid #8B2635;
+            border-radius: 5px;
+            color: #2c2c2c;
+            font-size: 15px;
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background: #8B2635;
+            color: #fff;
+            border: none;
+            padding: 15px 50px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            background: #6d1d29;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(139, 38, 53, 0.3);
+        }
+
+        /* 博客文章 */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            padding: 0 40px;
+        }
+
+        .blog-card {
+            background: #E8DED0;
+            border: 2px solid #8B2635;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(139, 38, 53, 0.2);
+        }
+
+        .blog-image {
+            width: 100%;
+            height: 200px;
+            background: #C9B8A3;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .blog-content {
+            padding: 25px;
+        }
+
+        .blog-content h3 {
+            color: #8B2635;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        .blog-date {
+            color: #7c7c7c;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .blog-content p {
+            line-height: 1.6;
+            color: #4c4c4c;
+        }
+
+        /* 联系页面 */
+        .contact-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        .contact-info {
+            background: #E8DED0;
+            border: 2px solid #8B2635;
+            border-radius: 10px;
+            padding: 50px;
+            margin-bottom: 40px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .contact-info h2 {
+            color: #8B2635;
+            font-size: 32px;
+            margin-bottom: 30px;
+        }
+
+        .contact-item {
+            margin: 20px 0;
+            font-size: 18px;
+            color: #3c3c3c;
+        }
+
+        .contact-item strong {
+            color: #8B2635;
+            display: inline-block;
+            width: 120px;
+        }
+
+        /* 移动端响应式 */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 20px;
+                padding: 15px 20px;
+            }
+
+            .nav-menu {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+                padding: 0 20px;
+            }
+
+            .service-card {
+                flex-direction: column;
+            }
+
+            .service-image {
+                min-height: 200px;
+            }
+
+            .blog-grid {
+                grid-template-columns: 1fr;
+                padding: 0 20px;
+            }
+
+            .hero-section h1 {
+                font-size: 32px;
+            }
+
+            .section-title {
+                font-size: 28px;
+            }
+
+            .logo {
+                font-size: 20px;
+            }
+
+            .logo img {
+                height: 50px;
+            }
+        }
+
+        /* 页面底部联系信息 */
+        .page-footer {
+            margin-top: 80px;
+            padding: 50px 40px;
+            background: #E8DED0;
+            border: 3px solid #8B2635;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .page-footer h2 {
+            color: #8B2635;
+            font-size: 32px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .page-footer .availability {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: #8B2635;
+            margin-bottom: 20px;
+        }
+
+        .page-footer .subtitle {
+            text-align: center;
+            font-size: 18px;
+            color: #5c5c5c;
+            margin-bottom: 40px;
+        }
+
+        .footer-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .footer-info {
+            background: #fff;
+            padding: 35px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border: 2px solid #8B2635;
+        }
+
+        .footer-info h3 {
+            color: #8B2635;
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .footer-contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .footer-contact-item {
+            font-size: 16px;
+            color: #3c3c3c;
+            line-height: 1.8;
+        }
+
+        .footer-contact-item strong {
+            color: #8B2635;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .footer-message {
+            text-align: center;
+            background: linear-gradient(135deg, #8B2635 0%, #6d1d29 100%);
+            color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .footer-message h3 {
+            font-size: 26px;
+            margin-bottom: 15px;
+        }
+
+        .footer-message p {
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .footer-message .highlight {
+            font-size: 22px;
+            font-weight: bold;
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .page-footer {
+                padding: 30px 20px;
+                margin-top: 50px;
+            }
+
+            .footer-info {
+                padding: 25px;
+            }
+
+            .footer-contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* 模态窗口样式 */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            animation: fadeIn 0.3s;
+        }
+
+        .modal.active {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: #E8DED0;
+            border: 3px solid #8B2635;
+            border-radius: 10px;
+            max-width: 800px;
+            width: 90%;
+            max-height: 85vh;
+            overflow-y: auto;
+            position: relative;
+            animation: slideIn 0.3s;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, #8B2635 0%, #6d1d29 100%);
+            color: white;
+            padding: 25px 30px;
+            border-radius: 7px 7px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            font-size: 28px;
+        }
+
+        .close-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid white;
+            color: white;
+            font-size: 28px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            line-height: 1;
+        }
+
+        .close-btn:hover {
+            background: white;
+            color: #8B2635;
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            padding: 30px;
+            color: #2c2c2c;
+        }
+
+        .modal-body h3 {
+            color: #8B2635;
+            font-size: 22px;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #8B2635;
+            padding-bottom: 8px;
+        }
+
+        .modal-body h3:first-child {
+            margin-top: 0;
+        }
+
+        .modal-body p {
+            line-height: 1.8;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        .modal-body ul {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        .modal-body ul li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        .case-example {
+            background: #fff;
+            border-left: 4px solid #8B2635;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .case-example h4 {
+            color: #8B2635;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .modal-content {
+                width: 95%;
+                max-height: 90vh;
+            }
+
+            .modal-header {
+                padding: 20px;
+            }
+
+            .modal-header h2 {
+                font-size: 22px;
+            }
+
+            .modal-body {
+                padding: 20px;
+            }
+        }

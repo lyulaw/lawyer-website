@@ -1,0 +1,30 @@
+<!-- 导航栏 -->
+<header class="header">
+    <nav class="nav-container">
+        <div class="logo">
+            <img src="images/logo.png" alt="吕昕橦律师事务所" class="logo-image">
+            <div class="logo-text">
+                吕昕橦律师事务所
+            </div>
+        </div>
+        <ul class="nav-menu">
+            <li><a href="#home">主页</a></li>
+            <li><a href="#services">业务领域</a></li>
+            <li><a href="#appointment">预约律师</a></li>
+            <li><a href="#contact">联系方式</a></li>
+            <li><span class="phone-contact" id="header-phone">📞 (212)812-8253</span></li>
+        </ul>
+    </nav>
+</header>
+
+<script>
+// 更新导航栏联系信息
+if (typeof getContactInfo === 'function') {
+    const info = getContactInfo();
+    const lawyerNameEl = document.getElementById('header-lawyer-name');
+    const phoneEl = document.getElementById('header-phone');
+
+    if (lawyerNameEl) lawyerNameEl.textContent = info.lawyerName;
+    if (phoneEl) phoneEl.textContent = `📞 ${info.phone1}`;
+}
+</script>

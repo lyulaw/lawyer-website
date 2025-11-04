@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>预约管理 - 吕昕橦律师事务所</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .admin-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .admin-header {
+            background: linear-gradient(135deg, #8B2635 0%, #A63446 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .admin-header h1 {
+            margin: 0 0 10px 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 36px;
+            font-weight: bold;
+            color: #8B2635;
+            margin: 10px 0;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .appointments-list {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .appointment-item {
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+            transition: background 0.3s;
+        }
+
+        .appointment-item:hover {
+            background: #f9f9f9;
+        }
+
+        .appointment-item:last-child {
+            border-bottom: none;
+        }
+
+        .appointment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .appointment-name {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .appointment-date {
+            color: #999;
+            font-size: 14px;
+        }
+
+        .appointment-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 15px 0;
+        }
+
+        .detail-item {
+            font-size: 14px;
+        }
+
+        .detail-label {
+            color: #666;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+
+        .appointment-message {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 10px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .case-type-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            background: #8B2635;
+            color: white;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #999;
+        }
+
+        .empty-state img {
+            width: 200px;
+            opacity: 0.5;
+            margin-bottom: 20px;
+        }
+
+        .filter-bar {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .filter-bar select {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏容器 -->
+    <div id="header-container"></div>
+
+    <main class="main-content">
+        <div class="admin-container">
+            <div class="admin-header">
+                <h1>📋 预约管理系统</h1>
+                <p>查看客户预约信息</p>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-label">总预约数</div>
+                    <div class="stat-number" id="totalCount">0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">今日预约</div>
+                    <div class="stat-number" id="todayCount">0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">本周预约</div>
+                    <div class="stat-number" id="weekCount">0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">本月预约</div>
+                    <div class="stat-number" id="monthCount">0</div>
+                </div>
+            </div>
+
+            <div class="filter-bar">
+                <label>筛选案件类型：</label>
+                <select id="caseTypeFilter">
+                    <option value="all">全部</option>
+                    <option value="civil">民事案件</option>
+                    <option value="criminal">刑事案件</option>
+                    <option value="immigration">移民法律</option>
+                    <option value="accident">车祸/工伤</option>
+                    <option value="medical">医疗事故</option>
+                    <option value="other">其他</option>
+                </select>
+            </div>
+
+            <div class="appointments-list" id="appointmentsList">
+                <!-- 预约列表将在这里动态生成 -->
+            </div>
+        </div>
+    </main>
+
+    <script src="../js/config.js"></script>
+    <script src="../js/modules/componentLoader.js"></script>
+    <script>
+        // 获取案件类型中文名称
+        function getCaseTypeName(caseType) {
+            const types = {
+                'civil': '民事案件',
+                'criminal': '刑事案件',
+                'immigration': '移民法律',
+                'accident': '车祸/工伤',
+                'medical': '医疗事故',
+                'other': '其他'
+            };
+            return types[caseType] || caseType;
+        }
+
+        // 加载预约数据
+        function loadAppointments() {
+            const appointments = JSON.parse(localStorage.getItem('appointments') || '[]');
+            const listContainer = document.getElementById('appointmentsList');
+            const filter = document.getElementById('caseTypeFilter').value;
+
+            // 筛选预约
+            const filteredAppointments = filter === 'all'
+                ? appointments
+                : appointments.filter(apt => apt.caseType === filter);
+
+            // 按时间倒序排列
+            filteredAppointments.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+
+            if (filteredAppointments.length === 0) {
+                listContainer.innerHTML = `
+                    <div class="empty-state">
+                        <h3>暂无预约信息</h3>
+                        <p>当客户提交预约表单后，信息将显示在这里</p>
+                    </div>
+                `;
+                return;
+            }
+
+            // 生成预约列表HTML
+            listContainer.innerHTML = filteredAppointments.map(apt => `
+                <div class="appointment-item">
+                    <div class="appointment-header">
+                        <div>
+                            <span class="appointment-name">${apt.name}</span>
+                            <span class="case-type-badge">${getCaseTypeName(apt.caseType)}</span>
+                        </div>
+                        <span class="appointment-date">${new Date(apt.timestamp).toLocaleString('zh-CN')}</span>
+                    </div>
+
+                    <div class="appointment-details">
+                        <div class="detail-item">
+                            <span class="detail-label">📞 电话：</span>
+                            <a href="tel:${apt.phone}">${apt.phone}</a>
+                        </div>
+                        ${apt.email ? `
+                        <div class="detail-item">
+                            <span class="detail-label">📧 邮箱：</span>
+                            <a href="mailto:${apt.email}">${apt.email}</a>
+                        </div>
+                        ` : ''}
+                        ${apt.preferredDate ? `
+                        <div class="detail-item">
+                            <span class="detail-label">🗓️ 希望咨询时间：</span>
+                            ${new Date(apt.preferredDate).toLocaleString('zh-CN')}
+                        </div>
+                        ` : ''}
+                    </div>
+
+                    <div class="appointment-message">
+                        <strong>案件简述：</strong><br>
+                        ${apt.message}
+                    </div>
+                </div>
+            `).join('');
+
+            // 更新统计数据
+            updateStats(appointments);
+        }
+
+        // 更新统计数据
+        function updateStats(appointments) {
+            const now = new Date();
+            const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+            const weekAgo = new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000);
+            const monthStart = new Date(now.getFullYear(), now.getMonth(), 1);
+
+            document.getElementById('totalCount').textContent = appointments.length;
+
+            document.getElementById('todayCount').textContent = appointments.filter(apt =>
+                new Date(apt.timestamp) >= today
+            ).length;
+
+            document.getElementById('weekCount').textContent = appointments.filter(apt =>
+                new Date(apt.timestamp) >= weekAgo
+            ).length;
+
+            document.getElementById('monthCount').textContent = appointments.filter(apt =>
+                new Date(apt.timestamp) >= monthStart
+            ).length;
+        }
+
+        // 筛选变化时重新加载
+        document.getElementById('caseTypeFilter').addEventListener('change', loadAppointments);
+
+        // 页面加载时加载预约数据
+        document.addEventListener('DOMContentLoaded', function() {
+            loadAppointments();
+
+            // 每30秒自动刷新一次
+            setInterval(loadAppointments, 30000);
+        });
+    </script>
+</body>
+</html>

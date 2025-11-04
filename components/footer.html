@@ -1,0 +1,71 @@
+<!-- 页面底部联系信息 -->
+<div class="page-footer">
+    <h2>联系我们</h2>
+    <div class="availability">24/7</div>
+    <p class="subtitle">如果您有任何法律需求，请随时与我们联系</p>
+
+    <div class="footer-content">
+        <div class="footer-info">
+            <h3>吕昕橦律师事务所</h3>
+            <div class="footer-contact-grid">
+                
+                <div class="footer-contact-item">
+                    <strong>电话</strong>
+                    <span id="footer-phone1">(212)812-8253</span><br>
+                    <span id="footer-phone2">(347)966-1978</span>
+                </div>
+                <div class="footer-contact-item">
+                    <strong>地址</strong>
+                    <span id="footer-address">36-36 Prince St., #309A</span><br>
+                    <span id="footer-address-detail">Flushing, NY 11354</span>
+                </div>
+                <div class="footer-contact-item">
+                    <strong>邮箱</strong>
+                    <span id="footer-email">catherine.lyu@lyulawpllc.com</span>
+                </div>
+                <div class="footer-contact-item">
+                    <strong>微信</strong>
+                    <span id="footer-wechat">catherinelyuesq</span>
+                </div>
+                <div class="footer-contact-item">
+                    <strong>办公时间</strong>
+                    <span id="footer-office-hours">周一至周六 9:00 AM - 5:30 PM<br>周日（仅限预约）</span>
+                </div>
+            </div>
+        </div>
+
+        
+    </div>
+</div>
+
+<script>
+// 更新页脚联系信息
+if (typeof getContactInfo === 'function') {
+    const info = getContactInfo();
+
+    const updates = {
+        'footer-lawyer-name': info.lawyerName,
+        'footer-phone1': info.phone1,
+        'footer-phone2': info.phone2,
+        'footer-address': info.address,
+        'footer-address-detail': info.addressDetail,
+        'footer-email': info.email,
+        'footer-wechat': info.wechat,
+        'footer-office-hours': info.officeHours
+    };
+
+    Object.entries(updates).forEach(([id, value]) => {
+        const el = document.getElementById(id);
+        if (el && value) {
+            el.innerHTML = value;
+        } else if (el && !value) {
+            // 如果值为空，隐藏该项
+            el.style.display = 'none';
+            const parent = el.closest('.footer-contact-item');
+            if (parent && parent.children.length === 2) {
+                parent.style.display = 'none';
+            }
+        }
+    });
+}
+</script>
