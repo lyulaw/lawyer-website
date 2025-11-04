@@ -50,12 +50,13 @@ const translations = {
             address: '地址',
             email: '邮箱',
             wechat: '微信',
-            officeHours: '办公时间'
+            officeHours: '办公时间',
+            officeHoursContent: '周一至周六 9:00 AM - 5:30 PM<br>周日（仅限预约）'
         }
     },
     en: {
         header: {
-            firmName: 'Catherine Lyu Law PLLC'
+            firmName: 'The Law Office of X.Lyu,PLLC'
         },
         nav: {
             home: 'Home',
@@ -65,7 +66,7 @@ const translations = {
         },
         home: {
             title: 'Professional Legal Services · Protecting Your Rights',
-            subtitle: 'Catherine Lyu Law PLLC has an experienced team of Chinese-speaking attorneys dedicated to providing comprehensive legal services to the Chinese community. We understand both Chinese and American legal systems, are fluent in both Chinese and English, and provide the most caring and professional legal solutions.',
+            subtitle: 'The Law Office of X.Lyu,PLLC has an experienced team of Chinese-speaking attorneys dedicated to providing comprehensive legal services to the Chinese community. We understand both Chinese and American legal systems, are fluent in both Chinese and English, and provide the most caring and professional legal solutions.',
             description: 'Our practice areas cover civil litigation, criminal defense, immigration law, business disputes, and more. Whatever legal issues you face, we are committed to serving you.',
             consultation: 'Free Consultation'
         },
@@ -98,12 +99,13 @@ const translations = {
             title: 'Contact Us',
             availability: '24/7',
             subtitle: 'If you have any legal needs, please feel free to contact us',
-            firmName: 'Catherine Lyu Law PLLC',
+            firmName: 'The Law Office of X.Lyu,PLLC',
             phone: 'Phone',
             address: 'Address',
             email: 'Email',
             wechat: 'WeChat',
-            officeHours: 'Office Hours'
+            officeHours: 'Office Hours',
+            officeHoursContent: 'Monday - Saturday: 9:00 AM - 5:30 PM<br>Sunday: By Appointment Only'
         }
     }
 };
@@ -139,6 +141,12 @@ function updatePageLanguage() {
     document.querySelectorAll('[data-i18n]').forEach(element => {
         const key = element.getAttribute('data-i18n');
         element.textContent = t(key);
+    });
+
+    // 更新HTML内容（支持<br>等标签）
+    document.querySelectorAll('[data-i18n-html]').forEach(element => {
+        const key = element.getAttribute('data-i18n-html');
+        element.innerHTML = t(key);
     });
 
     // 更新placeholder

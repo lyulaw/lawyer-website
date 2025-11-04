@@ -29,7 +29,7 @@
                 </div>
                 <div class="footer-contact-item">
                     <strong data-i18n="footer.officeHours">办公时间</strong>
-                    <span id="footer-office-hours">周一至周六 9:00 AM - 5:30 PM<br>周日（仅限预约）</span>
+                    <span id="footer-office-hours" data-i18n-html="footer.officeHoursContent">周一至周六 9:00 AM - 5:30 PM<br>周日（仅限预约）</span>
                 </div>
             </div>
         </div>
@@ -55,8 +55,8 @@ if (typeof getContactInfo === 'function') {
         'footer-address': info.address,
         'footer-address-detail': info.addressDetail,
         'footer-email': info.email,
-        'footer-wechat': info.wechat,
-        'footer-office-hours': info.officeHours
+        'footer-wechat': info.wechat
+        // footer-office-hours 由 i18n 处理，不在这里更新
     };
 
     Object.entries(updates).forEach(([id, value]) => {
