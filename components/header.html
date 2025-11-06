@@ -1,11 +1,16 @@
 <!-- 导航栏 -->
 <header class="header">
-    <!-- 第一行：律所名称、电话、语言选择 -->
+    <!-- 第一行：Logo + 律所名称、电话、语言选择 -->
     <div class="header-top">
         <div class="header-top-container">
-            <!-- 居中：律所名称 -->
-            <div class="header-firm-name" data-i18n="header.firmName">
-                吕昕橦律师事务所
+            <!-- Logo + 律所名称 -->
+            <div class="header-left">
+                <a href="about.html" class="header-logo">
+                    <img src="images/logo.png" alt="吕昕橦律师事务所">
+                </a>
+                <div class="header-firm-name" data-i18n="header.firmName">
+                    吕昕橦律师事务所
+                </div>
             </div>
 
             <!-- 右侧：电话和语言选择 -->
@@ -20,14 +25,9 @@
         </div>
     </div>
 
-    <!-- 第二行：Logo + 导航菜单 -->
+    <!-- 第二行：导航菜单 -->
     <nav class="header-nav">
         <div class="nav-container">
-            <!-- Logo -->
-            <a href="about.html" class="header-logo">
-                <img src="images/logo.png" alt="吕昕橦律师事务所">
-            </a>
-
             <ul class="nav-menu">
                 <li><a href="about.html" data-i18n="nav.about">关于我们</a></li>
                 <li><a href="services.html" data-i18n="nav.services">业务领域</a></li>
@@ -59,14 +59,29 @@
         margin: 0 auto;
         padding: 0 40px;
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
         align-items: center;
-        position: relative;
     }
 
-    /* 律所名称居中 */
+    /* 左侧：Logo + 律所名称 */
+    .header-left {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+    }
+
+    .header-logo {
+        display: flex;
+        align-items: center;
+    }
+
+    .header-logo img {
+        height: 60px;
+        width: auto;
+    }
+
+    /* 律所名称 */
     .header-firm-name {
-        text-align: center;
         font-size: 28px;
         font-weight: bold;
         color: #2c2c2c;
@@ -76,8 +91,6 @@
 
     /* 右侧：电话和语言 */
     .header-right {
-        position: absolute;
-        right: 40px;
         display: flex;
         align-items: center;
         gap: 20px;
@@ -122,7 +135,7 @@
         font-weight: bold;
     }
 
-    /* 第二行：Logo + 导航菜单 */
+    /* 第二行：导航菜单 */
     .header-nav {
         padding: 15px 0;
     }
@@ -133,19 +146,6 @@
         padding: 0 40px;
         display: flex;
         justify-content: center;
-        align-items: center;
-        gap: 30px;
-    }
-
-    /* Logo在导航栏中 */
-    .header-logo {
-        display: flex;
-        align-items: center;
-    }
-
-    .header-logo img {
-        height: 50px;
-        width: auto;
     }
 
     .nav-menu {
@@ -154,9 +154,9 @@
         align-items: center;
         list-style: none;
         gap: 0;
-        margin: 0;
+        margin: 0 auto;
         padding: 0;
-        max-width: 700px;
+        max-width: 800px;
         width: 100%;
     }
 
@@ -190,6 +190,14 @@
             gap: 10px;
         }
 
+        .header-left {
+            gap: 15px;
+        }
+
+        .header-logo img {
+            height: 40px;
+        }
+
         .header-firm-name {
             font-size: 16px;
             letter-spacing: 1px;
@@ -197,7 +205,6 @@
         }
 
         .header-right {
-            position: static;
             gap: 10px;
         }
 
@@ -219,12 +226,6 @@
 
         .nav-container {
             padding: 0 15px;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .header-logo img {
-            height: 35px;
         }
 
         .nav-menu {
