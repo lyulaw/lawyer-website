@@ -88,7 +88,7 @@ const translations = {
         },
         nav: {
             about: 'About Us',
-            services: 'Services',
+            services: 'Practice Areas',
             appointment: 'Consultation',
             contact: 'Contact',
             joinus: 'Join Us'
