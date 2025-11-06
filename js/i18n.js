@@ -237,13 +237,22 @@ document.addEventListener('DOMContentLoaded', function() {
     updatePageLanguage();
 
     // 监听DOM变化，当新内容加载时自动应用语言
+    let updateTimeout;
     const observer = new MutationObserver(function(mutations) {
-        mutations.forEach(function(mutation) {
-            if (mutation.addedNodes.length > 0) {
-                // 延迟一点确保内容完全加载
-                setTimeout(updatePageLanguage, 50);
+        // 使用防抖避免频繁更新
+        clearTimeout(updateTimeout);
+        updateTimeout = setTimeout(function() {
+            const hasNewContent = mutations.some(mutation =>
+                mutation.addedNodes.length > 0 &&
+                Array.from(mutation.addedNodes).some(node =>
+                    node.nodeType === 1 && // 只处理元素节点
+                    (node.querySelector('[data-i18n]') || node.hasAttribute('data-i18n'))
+                )
+            );
+            if (hasNewContent) {
+                updatePageLanguage();
             }
-        });
+        }, 100);
     });
 
     // 监听整个body的变化
