@@ -42,10 +42,8 @@
 <style>
     /* Header 整体样式 */
     .header {
-        position: fixed;
+        position: relative;
         width: 100%;
-        top: 0;
-        z-index: 1000;
         background: white;
         box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
@@ -175,7 +173,78 @@
 
     /* 调整主内容区域的margin */
     .main-content {
-        margin-top: 160px !important;
+        margin-top: 40px !important;
+    }
+
+    /* 移动端响应式样式 */
+    @media (max-width: 768px) {
+        .header-top {
+            padding: 10px 0;
+        }
+
+        .header-top-container {
+            padding: 0 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .header-logo {
+            flex: 0 0 auto;
+            order: 1;
+        }
+
+        .header-logo img {
+            height: 40px;
+        }
+
+        .header-firm-name {
+            flex: 0 0 100%;
+            order: 3;
+            font-size: 18px;
+            margin-top: 10px;
+            letter-spacing: 1px;
+        }
+
+        .header-right {
+            flex: 1;
+            order: 2;
+            gap: 10px;
+            justify-content: flex-end;
+        }
+
+        .header-phone {
+            font-size: 12px;
+        }
+
+        .lang-toggle {
+            padding: 5px 10px;
+        }
+
+        .lang-option {
+            font-size: 12px;
+        }
+
+        .header-nav {
+            padding: 10px 0;
+        }
+
+        .nav-container {
+            padding: 0 15px;
+        }
+
+        .nav-menu {
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .nav-menu li a {
+            font-size: 14px;
+        }
+
+        .main-content {
+            margin-top: 20px !important;
+        }
     }
 </style>
 
