@@ -99,7 +99,7 @@ const translations = {
             paragraph1: 'The Law Office of X. Lyu, PLLC is a bilingual Chinese-English law firm dedicated to serving individuals, families, and businesses in the United States. Our attorneys are graduates of leading U.S. law schools, hold Juris Doctor degrees, and have extensive experience across government, courts, top international law firms, and major corporations.',
             paragraph2: 'We provide legal services in civil litigation, family law, criminal defense, immigration law, real estate transactions and disputes, business and commercial law, personal injury, and intellectual property.',
             paragraph3: 'We believe in precise strategy, exceptional service, and uncompromised professionalism. With a rigorous legal team and strong problem-solving capabilities, we deliver comprehensive and high-quality legal solutions—protecting our clients\' rights and earning their trust with every case.',
-            value1: 'Professional Service.',
+            value1: '',
             value2: 'Dedicated Approach.',
             value3: 'Efficient Results.',
             value4: 'Trusted by Clients.'
